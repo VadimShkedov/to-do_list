@@ -1,3 +1,18 @@
 .todoInput {
   display: flex;
+  margin-bottom: 2rem;
+}
+
+.todoInput__button {
+  width: 40px;
+  background-image: url('../imgs/plus.svg');
+  background-repeat: no-repeat;
+  background-size: cover;
+  border: none;
+}
+
+.todoInput__inputText {
+  width: 220px;
+  margin-right: 0.5rem;
+  padding: 0 1rem;
 }

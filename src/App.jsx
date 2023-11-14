@@ -1,11 +1,15 @@
 import React from "react";
-import TodoList from "./TodoApp";
+import TodoApp from "./TodoApp";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
- 
+
 class App extends React.Component {
+  router = createBrowserRouter([{
+    element: <TodoApp />,
+    path: '/'
+  }])
 
   render() {
-    return <TodoList />
+    return <RouterProvider router={this.router} />
   }
 }
 

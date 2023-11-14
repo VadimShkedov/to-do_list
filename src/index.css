@@ -1,6 +1,6 @@
 body {
   margin: 0;
-  background: linear-gradient(to bottom right, blue, pink);
+  background: linear-gradient(to bottom right, #a9a9ff, white);
   background-repeat: no-repeat;
 
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
@@ -10,7 +10,8 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+input {
+  cursor: pointer;
+  border-radius: 5px;
+  height: 40px;
 }
