@@ -16,7 +16,7 @@ class TodoApp extends React.Component {
       valueEditingFormInput: "",
       warningMessage: ""
     };
-  }
+  };
 
   handleAddingInput = (value) => {
     this.setState({

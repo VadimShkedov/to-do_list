@@ -5,7 +5,7 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 class App extends React.Component {
   router = createBrowserRouter([{
     element: <TodoApp />,
-    path: '/'
+    path: "/"
   }])
 
   render() {
