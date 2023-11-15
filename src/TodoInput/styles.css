@@ -11,7 +11,7 @@
   border: none;
 }
 
-.todoInput__inputText {
+.todoInput__entryField {
   width: 220px;
   margin-right: 0.5rem;
   padding: 0 1rem;

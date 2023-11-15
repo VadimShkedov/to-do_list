@@ -1,6 +1,7 @@
 const inputValidation = (value) => {
   const valueWithoutSpaces = value.trim();
-  return (valueWithoutSpaces.length === 0 || !isNaN(+valueWithoutSpaces));
+  
+  return (!valueWithoutSpaces || !isNaN(valueWithoutSpaces));
 }
 
 export default inputValidation;

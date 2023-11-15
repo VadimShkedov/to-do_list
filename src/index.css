@@ -10,8 +10,11 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-input {
+button, input {
   cursor: pointer;
+}
+
+input {
   border-radius: 5px;
   height: 40px;
 }

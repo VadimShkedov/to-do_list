@@ -1,6 +1,6 @@
 import React from "react";
-import TodoApp from "./TodoApp";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import TodoApp from "./TodoApp";
 
 class App extends React.Component {
   router = createBrowserRouter([{

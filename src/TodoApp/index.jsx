@@ -1,6 +1,6 @@
 import React from "react";
 import TodoInput from "../TodoInput";
-import ListTodo from "../ListTodo";
+import TodoList from "../TodoList";
 import Warning from "../Warning";
 import inputValidation from "../helpers/inputValidation";
 import "./styles.css";
@@ -12,22 +12,22 @@ class TodoApp extends React.Component {
     this.state = {
       toDoList: [],
       //currentIdTaskComplete: -1,
-      valueAddingFromInput: "",
-      valueEditingFormInput: "",
+      textAddingToDo: "",
+      textEditingToDo: "",
       warningMessage: ""
     };
   };
 
   handleAddingInput = (value) => {
     this.setState({
-      valueAddingFromInput: value
+      textAddingToDo: value
     });
   }
 
   addFormValidation = () => {
-    const { valueAddingFromInput, toDoList } = this.state;
+    const { textAddingToDo, toDoList } = this.state;
 
-    if (inputValidation(valueAddingFromInput)) {
+    if (inputValidation(textAddingToDo)) {
       this.setState({
         warningMessage: "Некорректно введённое значение"
       });
@@ -36,7 +36,7 @@ class TodoApp extends React.Component {
 
     const modifiedTodoElement = {
       id: toDoList.length,
-      text: valueAddingFromInput
+      text: textAddingToDo
     };
 
     this.setState({
@@ -55,9 +55,9 @@ class TodoApp extends React.Component {
         <TodoInput 
           inputValue={valueFromInput} 
           handleInputValue={this.handleAddingInput} 
-          addTodoAndValidation={this.addFormValidation}
+          handeValidationTodo={this.addFormValidation}
         />
-        <ListTodo list={toDoList} />
+        <TodoList list={toDoList} />
       </section>
     )
   }

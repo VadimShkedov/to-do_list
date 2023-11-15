@@ -1,20 +1,20 @@
 import React from "react";
 import ToDoElement from "../TodoElement";
 
-class ListTodo extends React.Component {
+class TodoList extends React.Component {
 
   render() {
-    const { list, handleTodo, isComplete } = this.props
+    const { list, handleTodo, isComplete } = this.props;
 
     return (
-      list.map((toDoElement) => {
-        const { text, id } = toDoElement;
+      list.map((toDo) => {
+        const { text, id } = toDo;
 
         return (
           <ToDoElement
             key={id}
             text={text}
-            handler={handleTodo}
+            handleChange={handleTodo}
             isComplete={isComplete}
           />
         );
@@ -23,4 +23,4 @@ class ListTodo extends React.Component {
   }
 }
 
-export default ListTodo;
+export default TodoList;
