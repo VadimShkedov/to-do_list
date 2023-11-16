@@ -11,7 +11,7 @@ class TodoApp extends React.Component {
 
     this.state = {
       toDoList: [],
-      //currentIdTaskComplete: -1,
+      countCompleteTask: 0,
       textAddingToDo: "",
       textEditingToDo: "",
       warningMessage: ""
@@ -24,40 +24,68 @@ class TodoApp extends React.Component {
     });
   }
 
-  addFormValidation = () => {
-    const { textAddingToDo, toDoList } = this.state;
+  handleChange = (isChecked, id) => {
+    const modifyTasksArray = Object.assign([], this.state.toDoList);
+    modifyTasksArray[id].isComplete = isChecked;
 
-    if (inputValidation(textAddingToDo)) {
+    this.setState({
+      toDoList: modifyTasksArray,
+      countCompleteTask: (isChecked) ? this.state.countCompleteTask + 1 : this.state.countCompleteTask - 1
+    })
+  }
+
+  addFormValidation = () => {
+    if (inputValidation(this.state.textAddingToDo)) {
       this.setState({
         warningMessage: "Некорректно введённое значение"
       });
       return;
     }
+    const toDoList = this.state.toDoList;
 
     const modifiedTodoElement = {
-      id: toDoList.length,
-      text: textAddingToDo
+      id: (toDoList.length !== 0) ? toDoList[toDoList.length - 1].id + 1 : 0,
+      text: this.state.textAddingToDo,
+      isComplete: false
     };
 
     this.setState({
-      toDoList: [...toDoList, modifiedTodoElement],
+      toDoList: [...this.state.toDoList, modifiedTodoElement],
       warningMessage: ""
     });
   }
 
+  handleDeleteTodo = (taskId) => {
+    let currentCountTasks = this.state.countCompleteTask;
+
+    const newTodoList = this.state.toDoList.filter((value) => {
+      if (value.isComplete && value.id === taskId) {
+        currentCountTasks -= 1;
+      }
+
+      return value.id !== taskId;
+    });
+
+    this.setState({
+      toDoList: newTodoList,
+      countCompleteTask: currentCountTasks
+    });
+  }
+
   render() {
-    const { warningMessage, valueFromInput, toDoList } = this.state;
+    const { warningMessage, valueFromInput, toDoList, countCompleteTask } = this.state;
 
     return (
       <section className="todoList">
         <h1>Todo App</h1>
         <Warning message={warningMessage} />
-        <TodoInput 
-          inputValue={valueFromInput} 
-          handleInputValue={this.handleAddingInput} 
+        <TodoInput
+          inputValue={valueFromInput}
+          handleInputValue={this.handleAddingInput}
           handeValidationTodo={this.addFormValidation}
         />
-        <TodoList list={toDoList} />
+        <TodoList list={toDoList} handleChange={this.handleChange} handleDeleteTodo={this.handleDeleteTodo} />
+        <p>Total - {toDoList.length} tasks, completed - {countCompleteTask}</p>
       </section>
     )
   }

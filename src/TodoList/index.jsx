@@ -4,7 +4,7 @@ import ToDoElement from "../TodoElement";
 class TodoList extends React.Component {
 
   render() {
-    const { list, handleTodo, isComplete } = this.props;
+    const { list, handleChange, handleDeleteTodo } = this.props;
 
     return (
       list.map((toDo) => {
@@ -14,8 +14,10 @@ class TodoList extends React.Component {
           <ToDoElement
             key={id}
             text={text}
-            handleChange={handleTodo}
-            isComplete={isComplete}
+            toDoId={id}
+            handleChange={handleChange}
+            isComplete={toDo.isComplete}
+            handleDeleteTodo={handleDeleteTodo}
           />
         );
       })
