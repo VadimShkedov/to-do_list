@@ -2,6 +2,7 @@ import React from "react";
 import TodoInput from "../TodoInput";
 import TodoList from "../TodoList";
 import Warning from "../Warning";
+import TotalData from "../TotalData";
 import inputValidation from "../helpers/inputValidation";
 import "./styles.css";
 
@@ -85,8 +86,8 @@ class TodoApp extends React.Component {
           handleInputValue={this.handleAddingInput}
           handeValidationTodo={this.addFormValidation}
         />
+        <TotalData countAll={toDoList.length} countCompleteTask={countCompleteTask} />
         <TodoList list={toDoList} handleChange={this.handleChange} handleDeleteTodo={this.handleDeleteTodo} />
-        <p>Total - {toDoList.length} tasks, completed - {countCompleteTask}</p>
       </section>
     )
   }
