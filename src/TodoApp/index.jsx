@@ -24,9 +24,10 @@ class TodoApp extends React.Component {
     });
   }
 
-  handleChange = (isChecked, id) => {
+  handleChange = (isChecked, taskId) => {
     const modifyTasksArray = Object.assign([], this.state.toDoList);
-    modifyTasksArray[id].isComplete = isChecked;
+    const indexChangedTask = modifyTasksArray.findIndex((task) => task.id === taskId)
+    modifyTasksArray[indexChangedTask].isComplete = isChecked
 
     this.setState({
       toDoList: modifyTasksArray,
