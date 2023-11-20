@@ -16,8 +16,7 @@ class TodoList extends React.Component {
             <EditableTodo 
               key={id}
               textEditingToDo={textEditingToDo}
-              handleDeleteTodo={handleDeleteTodo}
-              handleEditTodo={}
+              handleEditingTodo={}
             />
           )
         }
