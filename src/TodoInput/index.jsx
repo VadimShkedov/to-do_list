@@ -16,7 +16,8 @@ class TodoInput extends React.Component {
           placeholder="Add your new todo"
         />
         <button
-          type="button" 
+          type="button"
+          title="Добавить задачу"
           className="todoInput__button" 
           onClick={handleValidationTodo}
         ></button>

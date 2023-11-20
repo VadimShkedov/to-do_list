@@ -4,6 +4,7 @@ import TodoList from "../TodoList";
 import Warning from "../Warning";
 import TotalData from "../TotalData";
 import inputValidation from "../helpers/inputValidation";
+import SortTasks from "../SortTasks";
 import "./styles.css";
 
 class TodoApp extends React.Component {
@@ -15,7 +16,9 @@ class TodoApp extends React.Component {
       countCompleteTask: 0,
       textAddingToDo: "",
       textEditingToDo: "",
-      warningMessage: ""
+      warningMessage: "",
+      sortedMethod: "time",
+      editingTaskId: null
     };
   };
 
@@ -36,6 +39,43 @@ class TodoApp extends React.Component {
     });
   }
 
+  handleEdit = (text, taskId) => {
+    this.setState({
+      textEditingToDo: text,
+      editingTaskId: taskId
+    });
+  }
+
+  handleSortedMethod = (e) => {
+    const method = e.target.value;
+
+    if (method === "complete") {
+      const uncheckedTasksArray = [];
+      const completedTasksArray = [];
+
+      for (const task of this.state.toDoList) {
+        if (task.isComplete) {
+          uncheckedTasksArray.push(task)
+          continue
+        }
+        completedTasksArray.push(task)
+      }
+
+      const concattedArrays = [].concat(uncheckedTasksArray, completedTasksArray);
+      this.setState({
+        toDoList: concattedArrays
+      });
+    } else {
+      this.setState({
+        toDoList: this.state.toDoList.sort((a, b) => a.id - b.id)
+      });
+    }
+
+    this.setState({
+      sortedMethod: method
+    });
+  } 
+
   addFormValidation = () => {
     if (inputValidation(this.state.textAddingToDo)) {
       this.setState({
@@ -53,8 +93,13 @@ class TodoApp extends React.Component {
 
     this.setState({
       toDoList: [...this.state.toDoList, modifiedTodoElement],
-      warningMessage: ""
+      warningMessage: "",
+      textAddingToDo: ""
     });
+  }
+
+  editFormValidation = () => {
+
   }
 
   handleDeleteTodo = (taskId) => {
@@ -74,12 +119,23 @@ class TodoApp extends React.Component {
     });
   }
 
+  handleDeletingAllTasks = () => {
+    this.setState({
+      toDoList: [],
+      countCompleteTask: 0
+    })
+  }
+
   render() {
-    const { warningMessage, textAddingToDo, toDoList, countCompleteTask } = this.state;
+    const { warningMessage, textAddingToDo, toDoList, countCompleteTask, sortedMethod, editingTaskId, textEditingToDo } = this.state;
 
     return (
       <section className="todoApp">
         <h1>Todo App</h1>
+        <div>
+          <SortTasks sortedMethod={sortedMethod} handleSortedMethod={this.handleSortedMethod} />
+          <button className="todoApp__deleteAll" title="Удалить все задачи" onClick={this.handleDeletingAllTasks}></button>
+        </div>
         <Warning message={warningMessage} />
         <TodoInput
           textTodo={textAddingToDo}
@@ -91,7 +147,9 @@ class TodoApp extends React.Component {
           countCompleteTask={countCompleteTask} 
         />
         <TodoList 
-          list={toDoList} 
+          list={toDoList}
+          editingTaskId={editingTaskId}
+          textEditingToDo={textEditingToDo}
           handleChange={this.handleChange} 
           handleDeleteTodo={this.handleDeleteTodo} 
         />
