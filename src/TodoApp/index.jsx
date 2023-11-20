@@ -27,13 +27,13 @@ class TodoApp extends React.Component {
 
   handleChange = (isChecked, taskId) => {
     const modifyTasksArray = Object.assign([], this.state.toDoList);
-    const indexChangedTask = modifyTasksArray.findIndex((task) => task.id === taskId)
-    modifyTasksArray[indexChangedTask].isComplete = isChecked
+    const indexChangedTask = modifyTasksArray.findIndex((task) => task.id === taskId);
+    modifyTasksArray[indexChangedTask].isComplete = isChecked;
 
     this.setState({
       toDoList: modifyTasksArray,
       countCompleteTask: (isChecked) ? this.state.countCompleteTask + 1 : this.state.countCompleteTask - 1
-    })
+    });
   }
 
   addFormValidation = () => {
