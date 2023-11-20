@@ -1,0 +1,6 @@
+.warning {
+  margin: 0.5rem 0;
+  color: red;
+  min-height: 20px;
+  text-align: left;
+}

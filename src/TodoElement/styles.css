@@ -1,0 +1,29 @@
+.todoElement {
+  display: flex;
+  margin-bottom: 1rem;
+}
+
+.todoElement__deleteButton {
+  background-image: url('../imgs/trash.svg');
+  width: 40px;
+  background-repeat: no-repeat;
+  background-size: cover;
+  border: none;
+  margin-left: 0.5rem;
+}
+
+.todoElement__info {
+  background-color: aliceblue;
+  display: flex;
+  flex-grow: 1;
+  height: 40px;
+  align-items: center;
+  padding: 0 1rem;
+  color: black;
+  border-radius: 5px;
+}
+
+.todoElement__check {
+  margin-right: 1rem;
+  border-radius: 50%;
+}

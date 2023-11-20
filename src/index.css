@@ -1,0 +1,20 @@
+body {
+  margin: 0;
+  background: linear-gradient(to bottom right, #a9a9ff, white);
+  background-repeat: no-repeat;
+
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+button, input {
+  cursor: pointer;
+}
+
+input {
+  border-radius: 5px;
+  height: 40px;
+}

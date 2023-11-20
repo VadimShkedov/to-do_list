@@ -1,0 +1,8 @@
+.todoApp {
+  text-align: center;
+  color: white;
+  margin: auto;
+  padding: 1rem;
+  width: max-content;
+  min-height: 100vh;
+}
