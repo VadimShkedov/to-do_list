@@ -75,19 +75,26 @@ class TodoApp extends React.Component {
   }
 
   render() {
-    const { warningMessage, valueFromInput, toDoList, countCompleteTask } = this.state;
+    const { warningMessage, textAddingToDo, toDoList, countCompleteTask } = this.state;
 
     return (
-      <section className="todoList">
+      <section className="todoApp">
         <h1>Todo App</h1>
         <Warning message={warningMessage} />
         <TodoInput
-          inputValue={valueFromInput}
+          textTodo={textAddingToDo}
           handleInputValue={this.handleAddingInput}
-          handeValidationTodo={this.addFormValidation}
+          handleValidationTodo={this.addFormValidation}
         />
-        <TotalData countAll={toDoList.length} countCompleteTask={countCompleteTask} />
-        <TodoList list={toDoList} handleChange={this.handleChange} handleDeleteTodo={this.handleDeleteTodo} />
+        <TotalData 
+          countAllTasks={toDoList.length} 
+          countCompleteTask={countCompleteTask} 
+        />
+        <TodoList 
+          list={toDoList} 
+          handleChange={this.handleChange} 
+          handleDeleteTodo={this.handleDeleteTodo} 
+        />
       </section>
     )
   }

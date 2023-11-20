@@ -3,10 +3,10 @@ import "./styles.css"
 
 class TotalData extends React.Component {
   render() {
-    const { countAll, countCompleteTask } = this.props;
+    const { countAllTasks, countCompleteTask } = this.props;
 
     return (
-      <p className="totalData">Total - <b>{countAll}</b> tasks, completed - <b>{countCompleteTask}</b></p>
+      <p className="totalData">Total - <b>{countAllTasks}</b> tasks, completed - <b>{countCompleteTask}</b></p>
     )
   }
 }
