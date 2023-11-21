@@ -26,6 +26,7 @@
 .todoElement__check {
   margin-right: 1rem;
   border-radius: 50%;
+  width: 25px;
 }
 
 .todoElement__editButton {

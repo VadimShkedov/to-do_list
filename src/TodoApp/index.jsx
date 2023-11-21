@@ -22,7 +22,7 @@ class TodoApp extends React.Component {
     };
   };
 
-  handleAddingInput = (value) => {
+  handleAddingTodo = (value) => {
     this.setState({
       textAddingToDo: value
     });
@@ -39,11 +39,17 @@ class TodoApp extends React.Component {
     });
   }
 
-  handleEdit = (text, taskId) => {
+  handleEditingTodo = (text) => {
     this.setState({
       textEditingToDo: text,
-      editingTaskId: taskId
     });
+  }
+
+  createEditingTodo = (todoId, text) => {
+    this.setState({
+      editingTaskId: todoId,
+      textEditingToDo: text
+    })
   }
 
   handleSortedMethod = (e) => {
@@ -99,7 +105,22 @@ class TodoApp extends React.Component {
   }
 
   editFormValidation = () => {
+    if (inputValidation(this.state.textEditingToDo)) {
+      this.setState({
+        warningMessage: "Некорректно введённое значение"
+      });
+      return;
+    }
+  
+    const newTodoArray = Object.assign([], this.state.toDoList)
+    const indexEditingTask = this.state.toDoList.findIndex((task) => task.id === this.state.editingTaskId)
+    newTodoArray[indexEditingTask].text = this.state.textEditingToDo;
 
+    this.setState({
+      toDoList: newTodoArray,
+      textEditingToDo: "",
+      editingTaskId: null
+    });
   }
 
   handleDeleteTodo = (taskId) => {
@@ -132,14 +153,14 @@ class TodoApp extends React.Component {
     return (
       <section className="todoApp">
         <h1>Todo App</h1>
-        <div>
+         <div>
           <SortTasks sortedMethod={sortedMethod} handleSortedMethod={this.handleSortedMethod} />
           <button className="todoApp__deleteAll" title="Удалить все задачи" onClick={this.handleDeletingAllTasks}></button>
         </div>
         <Warning message={warningMessage} />
         <TodoInput
           textTodo={textAddingToDo}
-          handleInputValue={this.handleAddingInput}
+          handleInputValue={this.handleAddingTodo}
           handleValidationTodo={this.addFormValidation}
         />
         <TotalData 
@@ -151,7 +172,10 @@ class TodoApp extends React.Component {
           editingTaskId={editingTaskId}
           textEditingToDo={textEditingToDo}
           handleChange={this.handleChange} 
-          handleDeleteTodo={this.handleDeleteTodo} 
+          handleDeleteTodo={this.handleDeleteTodo}
+          validationEditingTodo={this.editFormValidation}
+          handleEditingTodo={this.handleEditingTodo}
+          createEditingTodo={this.createEditingTodo}
         />
       </section>
     )

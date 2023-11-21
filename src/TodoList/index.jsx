@@ -5,7 +5,7 @@ import EditableTodo from "../EditableTodo";
 class TodoList extends React.Component {
 
   render() {
-    const { list, handleChange, handleDeleteTodo, editingTaskId, textEditingToDo } = this.props;
+    const { list, handleChange, handleDeleteTodo, editingTaskId, textEditingToDo, validationEditingTodo, handleEditingTodo, createEditingTodo } = this.props;
 
     return (
       list.map((toDo) => {
@@ -13,10 +13,11 @@ class TodoList extends React.Component {
 
         if (editingTaskId === id) {
           return (
-            <EditableTodo 
+            <EditableTodo
               key={id}
               textEditingToDo={textEditingToDo}
-              handleEditingTodo={}
+              handleEditingTodo={handleEditingTodo}
+              validationEditingTodo={validationEditingTodo}
             />
           )
         }
@@ -29,6 +30,7 @@ class TodoList extends React.Component {
             handleChange={handleChange}
             isComplete={isComplete}
             handleDeleteTodo={handleDeleteTodo}
+            createEditingTodo={createEditingTodo}
           />
         );
       })

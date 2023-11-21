@@ -3,12 +3,12 @@ import "./styles.css"
 
 class EditableTodo extends React.Component {
   render() {
-    const { handleEditingTodo, textEditingToDo } = this.props
+    const { handleEditingTodo, textEditingToDo, validationEditingTodo } = this.props
 
     return (
       <div className="editableTodo">
-        <input type="text" onChange={handleEditingTodo} value={textEditingToDo} />
-        <button className="editableTodo__applyChanges"></button>
+        <input type="text" className="editableTodo__entryField" onChange={(e) => handleEditingTodo(e.target.value)} value={textEditingToDo} />
+        <button onClick={validationEditingTodo} className="editableTodo__applyChanges"></button>
       </div>
     )
   }

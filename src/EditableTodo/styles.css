@@ -1,5 +1,15 @@
+.editableTodo {
+  margin-bottom: 1rem;
+}
+
+.editableTodo__entryField {
+  padding-left: 2rem;
+  width: 350px;
+  border: none;
+}
+
 .editableTodo__applyChanges {
-  background-image: url(../imgs/edit.svg);
+  background-image: url(../imgs/apply.svg);
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
