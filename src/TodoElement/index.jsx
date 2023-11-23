@@ -16,11 +16,18 @@ class TodoElement extends React.Component {
           />
           <p>{text}</p>
         </div>
-        <button className="todoElement__editButton" onClick={() => createEditingTodo(toDoId, text)}></button>
+        <button
+          className="todoElement__editButton"
+          type="button"
+          onClick={() => createEditingTodo(toDoId, text)}
+        >
+        </button>
         <button
           className="todoElement__deleteButton"
+          type="button"
           onClick={() => handleDeleteTodo(toDoId)}
-        ></button>
+        >
+        </button>
       </div>
     )
   }

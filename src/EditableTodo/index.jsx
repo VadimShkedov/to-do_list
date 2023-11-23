@@ -7,8 +7,18 @@ class EditableTodo extends React.Component {
 
     return (
       <div className="editableTodo">
-        <input type="text" className="editableTodo__entryField" onChange={(e) => handleEditingTodo(e.target.value)} value={textEditingToDo} />
-        <button onClick={validationEditingTodo} className="editableTodo__applyChanges"></button>
+        <input 
+          type="text" 
+          className="editableTodo__entryField" 
+          onChange={(e) => handleEditingTodo(e.target.value)} 
+          value={textEditingToDo} 
+        />
+        <button 
+          type="button"
+          onClick={validationEditingTodo} 
+          className="editableTodo__applyChanges"
+        >
+        </button>
       </div>
     )
   }

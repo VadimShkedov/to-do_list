@@ -4,12 +4,7 @@
 }
 
 .todoInput__button {
-  width: 40px;
   background-image: url('../imgs/plus.svg');
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-position: center;
-  border: none;
 }
 
 .todoInput__entryField {

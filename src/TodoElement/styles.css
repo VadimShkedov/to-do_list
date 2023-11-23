@@ -31,10 +31,4 @@
 
 .todoElement__editButton {
   background-image: url(../imgs/edit.svg);
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: cover;
-  width: 40px;
-  margin-left: 0.5em;
-  border: none;
 }

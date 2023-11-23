@@ -22,9 +22,9 @@ class TodoApp extends React.Component {
     };
   };
 
-  handleAddingTodo = (value) => {
+  handleAddingTodo = (text) => {
     this.setState({
-      textAddingToDo: value
+      textAddingToDo: text
     });
   }
 
@@ -45,42 +45,33 @@ class TodoApp extends React.Component {
     });
   }
 
-  createEditingTodo = (todoId, text) => {
+  createEditingTodo = (taskId, text) => {
     this.setState({
-      editingTaskId: todoId,
+      editingTaskId: taskId,
       textEditingToDo: text
-    })
+    });
   }
 
   handleSortedMethod = (e) => {
     const method = e.target.value;
+    let modifyArray = [...this.state.toDoList]
+    switch (method) {
+      case "complete":
+        modifyArray.sort((task) => task.isComplete ? -1 : 1)
+        break;
 
-    if (method === "complete") {
-      const uncheckedTasksArray = [];
-      const completedTasksArray = [];
+      case "time":
+        modifyArray.sort((a, b) => a.id - b.id);
+        break;
 
-      for (const task of this.state.toDoList) {
-        if (task.isComplete) {
-          uncheckedTasksArray.push(task)
-          continue
-        }
-        completedTasksArray.push(task)
-      }
-
-      const concattedArrays = [].concat(uncheckedTasksArray, completedTasksArray);
-      this.setState({
-        toDoList: concattedArrays
-      });
-    } else {
-      this.setState({
-        toDoList: this.state.toDoList.sort((a, b) => a.id - b.id)
-      });
+      default: break;
     }
 
     this.setState({
+      toDoList: modifyArray,
       sortedMethod: method
     });
-  } 
+  }
 
   addFormValidation = () => {
     if (inputValidation(this.state.textAddingToDo)) {
@@ -111,7 +102,7 @@ class TodoApp extends React.Component {
       });
       return;
     }
-  
+
     const newTodoArray = Object.assign([], this.state.toDoList)
     const indexEditingTask = this.state.toDoList.findIndex((task) => task.id === this.state.editingTaskId)
     newTodoArray[indexEditingTask].text = this.state.textEditingToDo;
@@ -119,7 +110,8 @@ class TodoApp extends React.Component {
     this.setState({
       toDoList: newTodoArray,
       textEditingToDo: "",
-      editingTaskId: null
+      editingTaskId: null,
+      warningMessage: ""
     });
   }
 
@@ -153,9 +145,18 @@ class TodoApp extends React.Component {
     return (
       <section className="todoApp">
         <h1>Todo App</h1>
-         <div>
-          <SortTasks sortedMethod={sortedMethod} handleSortedMethod={this.handleSortedMethod} />
-          <button className="todoApp__deleteAll" title="Удалить все задачи" onClick={this.handleDeletingAllTasks}></button>
+        <div>
+          <SortTasks
+            sortingMethod={sortedMethod}
+            handleSortingMethod={this.handleSortedMethod}
+          />
+          <button
+            type="button"
+            className="todoApp__deleteAll"
+            title="Удалить все задачи"
+            onClick={this.handleDeletingAllTasks}
+          >
+          </button>
         </div>
         <Warning message={warningMessage} />
         <TodoInput
@@ -163,15 +164,15 @@ class TodoApp extends React.Component {
           handleInputValue={this.handleAddingTodo}
           handleValidationTodo={this.addFormValidation}
         />
-        <TotalData 
-          countAllTasks={toDoList.length} 
-          countCompleteTask={countCompleteTask} 
+        <TotalData
+          countAllTasks={toDoList.length}
+          countCompleteTask={countCompleteTask}
         />
-        <TodoList 
+        <TodoList
           list={toDoList}
           editingTaskId={editingTaskId}
           textEditingToDo={textEditingToDo}
-          handleChange={this.handleChange} 
+          handleChange={this.handleChange}
           handleDeleteTodo={this.handleDeleteTodo}
           validationEditingTodo={this.editFormValidation}
           handleEditingTodo={this.handleEditingTodo}
