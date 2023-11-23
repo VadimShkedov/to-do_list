@@ -5,21 +5,23 @@ class TodoInput extends React.Component {
 
   render() {
     const { textTodo, handleInputValue, handleValidationTodo } = this.props
- 
+
     return (
       <div className="todoInput">
-        <input 
+        <input
           type="text"
           className="todoInput__entryField"
-          value={textTodo} 
+          value={textTodo}
           onChange={(e) => handleInputValue(e.target.value)}
           placeholder="Add your new todo"
         />
         <button
-          type="button" 
-          className="todoInput__button" 
+          type="button"
+          title="Добавить задачу"
+          className="todoInput__button"
           onClick={handleValidationTodo}
-        ></button>
+        >
+        </button>
       </div>
     )
   }

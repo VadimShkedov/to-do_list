@@ -3,7 +3,7 @@ import "./styles.css";
 
 class TodoElement extends React.Component {
   render() {
-    const { text, handleChange, isComplete, toDoId, handleDeleteTodo } = this.props;
+    const { text, handleChange, isComplete, toDoId, handleDeleteTodo, createEditingTodo } = this.props;
 
     return (
       <div className="todoElement">
@@ -16,11 +16,18 @@ class TodoElement extends React.Component {
           />
           <p>{text}</p>
         </div>
-        <input
+        <button
+          className="todoElement__editButton"
           type="button"
+          onClick={() => createEditingTodo(toDoId, text)}
+        >
+        </button>
+        <button
           className="todoElement__deleteButton"
+          type="button"
           onClick={() => handleDeleteTodo(toDoId)}
-        />
+        >
+        </button>
       </div>
     )
   }

@@ -6,3 +6,12 @@
   width: max-content;
   min-height: 100vh;
 }
+
+.todoApp>div {
+  display: flex;
+  justify-content: space-between;
+}
+
+.todoApp__deleteAll {
+  background-image: url(../imgs/deleteall.svg);
+}

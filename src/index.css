@@ -18,3 +18,12 @@ input {
   border-radius: 5px;
   height: 40px;
 }
+
+button {
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  width: 40px;
+  margin-left: 0.5em;
+  border: none;
+}

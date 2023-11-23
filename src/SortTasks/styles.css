@@ -1,0 +1,14 @@
+.sortTasks {
+  display: flex;
+  flex-direction: column;
+}
+
+.sortTasks label {
+  color: #9C27B0;
+}
+
+.sortTasks select {
+  border-radius: 5px;
+  background-color: white;
+  height: 30px;
+}
