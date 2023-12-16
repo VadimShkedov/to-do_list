@@ -8,15 +8,15 @@ class TodoList extends React.Component {
 
     return (
       list.map((toDo) => {
-        const { text, id, isComplete } = toDo;
+        const { text, _id, isCheck } = toDo;
 
         return (
           <ToDoElement
-            key={id}
+            key={_id}
             text={text}
-            toDoId={id}
+            toDoId={_id}
             handleChange={handleChange}
-            isComplete={isComplete}
+            isCheck={isCheck}
             handleDeleteTodo={handleDeleteTodo}
           />
         );

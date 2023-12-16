@@ -3,7 +3,7 @@ import "./styles.css";
 
 class TodoElement extends React.Component {
   render() {
-    const { text, handleChange, isComplete, toDoId, handleDeleteTodo } = this.props;
+    const { text, handleChange, isCheck, toDoId, handleDeleteTodo } = this.props;
 
     return (
       <div className="todoElement">
@@ -11,7 +11,7 @@ class TodoElement extends React.Component {
           <input
             type="checkbox"
             className="todoElement__check"
-            value={isComplete}
+            value={isCheck}
             onChange={(e) => handleChange(e.target.checked, toDoId)}
           />
           <p>{text}</p>

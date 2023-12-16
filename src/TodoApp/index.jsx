@@ -1,4 +1,6 @@
 import React from "react";
+
+import api from "../api/axiosInstance";
 import TodoInput from "../TodoInput";
 import TodoList from "../TodoList";
 import Warning from "../Warning";
@@ -19,59 +21,67 @@ class TodoApp extends React.Component {
     };
   };
 
+  async componentDidMount() {
+    const { data } = await api.get('/tasks')
+    this.setState({ toDoList: data })
+  }
+
   handleAddingInput = (value) => {
     this.setState({
       textAddingToDo: value
     });
   }
 
-  handleChange = (isChecked, taskId) => {
+  handleChange = async (isCheck, id) => {
     const modifyTasksArray = Object.assign([], this.state.toDoList);
-    const indexChangedTask = modifyTasksArray.findIndex((task) => task.id === taskId);
-    modifyTasksArray[indexChangedTask].isComplete = isChecked;
+    const indexChangedTask = modifyTasksArray.findIndex((task) => task._id === id);
+    modifyTasksArray[indexChangedTask].isCheck = isCheck;
 
     this.setState({
       toDoList: modifyTasksArray,
-      countCompleteTask: (isChecked) ? this.state.countCompleteTask + 1 : this.state.countCompleteTask - 1
+      countCompleteTask: (isCheck) ? this.state.countCompleteTask + 1 : this.state.countCompleteTask - 1
     });
+
+    await api.patch('/tasks', { id, isCheck })
   }
 
-  addFormValidation = () => {
+  addFormValidation = async () => {
     if (inputValidation(this.state.textAddingToDo)) {
       this.setState({
         warningMessage: "Некорректно введённое значение"
       });
       return;
     }
-    const toDoList = this.state.toDoList;
 
-    const modifiedTodoElement = {
-      id: (toDoList.length !== 0) ? toDoList[toDoList.length - 1].id + 1 : 0,
-      text: this.state.textAddingToDo,
-      isComplete: false
-    };
+    const { data } = await api.post(
+      '/tasks',
+      { text: this.state.textAddingToDo }
+    )
 
     this.setState({
-      toDoList: [...this.state.toDoList, modifiedTodoElement],
-      warningMessage: ""
+      toDoList: [...this.state.toDoList, data],
+      warningMessage: "",
+      textAddingToDo: ""
     });
   }
 
-  handleDeleteTodo = (taskId) => {
+  handleDeleteTodo = async (taskId) => {
     let currentCountTasks = this.state.countCompleteTask;
 
     const newTodoList = this.state.toDoList.filter((value) => {
-      if (value.isComplete && value.id === taskId) {
+      if (value.isCheck && value._id === taskId) {
         currentCountTasks -= 1;
       }
 
-      return value.id !== taskId;
+      return value._id !== taskId;
     });
 
     this.setState({
       toDoList: newTodoList,
       countCompleteTask: currentCountTasks
     });
+
+    await api.delete('/tasks', { data: { id: taskId } })
   }
 
   render() {
